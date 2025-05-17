@@ -51,7 +51,7 @@ if library.theme.cursor and Drawing then
         library.cursor.Size = Vector2.new(32, 32)
         library.cursor.Visible = uis.MouseEnabled
         library.cursor.Rounding = 0
-        library.cursor.Position = Vector2.new(mouse.X - 32, mouse.Y + 6)
+        library.cursor.Position = Vector2.new(mouse.X, mouse.Y)
     end)
     if success and library.cursor then
         uis.InputChanged:Connect(function(input)
