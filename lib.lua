@@ -24,7 +24,7 @@ library.theme = {
     font = Enum.Font.Code,
     background = "rbxassetid://5553946656",
     tilesize = 90,
-    cursor = false,
+    cursor = true,
     cursorimg = "https://raw.githubusercontent.com/cattium/synapsehook/refs/heads/main/cursor.png",
     backgroundcolor = Color3.fromRGB(20, 20, 20),
     tabstextcolor = Color3.fromRGB(240, 240, 240),
@@ -48,7 +48,7 @@ if library.theme.cursor and Drawing then
     local success = pcall(function() 
         library.cursor = Drawing.new("Image")
         library.cursor.Data = game:HttpGet(library.theme.cursorimg)
-        library.cursor.Size = Vector2.new(64, 64)
+        library.cursor.Size = Vector2.new(32, 32)
         library.cursor.Visible = uis.MouseEnabled
         library.cursor.Rounding = 0
         library.cursor.Position = Vector2.new(mouse.X - 32, mouse.Y + 6)
