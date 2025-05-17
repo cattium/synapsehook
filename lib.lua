@@ -57,7 +57,7 @@ if library.theme.cursor and Drawing then
         uis.InputChanged:Connect(function(input)
             if uis.MouseEnabled then
                 if input.UserInputType == Enum.UserInputType.MouseMovement then
-                    library.cursor.Position = Vector2.new(input.Position.X - 32, input.Position.Y + 7)
+                    library.cursor.Position = Vector2.new(input.Position.X, input.Position.Y)
                 end
             end
         end)
