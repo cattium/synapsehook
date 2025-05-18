@@ -17,7 +17,6 @@ local httpservice = game:GetService("HttpService")
 local player = players.LocalPlayer
 local mouse = player:GetMouse()
 local camera = game.Workspace.CurrentCamera
-
 library.theme = {
     fontsize = 15,
     titlesize = 18,
@@ -48,20 +47,18 @@ if library.theme.cursor and Drawing then
     local success = pcall(function() 
         library.cursor = Drawing.new("Image")
         library.cursor.Data = game:HttpGet(library.theme.cursorimg)
-        library.cursor.Size = Vector2.new(32, 32)
+        library.cursor.Size = Vector2.new(64, 64)
         library.cursor.Visible = uis.MouseEnabled
         library.cursor.Rounding = 0
         library.cursor.Position = Vector2.new(mouse.X, mouse.Y)
     end)
     if success and library.cursor then
         uis.InputChanged:Connect(function(input)
-            if uis.MouseEnabled then
-                if input.UserInputType == Enum.UserInputType.MouseMovement then
-                    library.cursor.Position = Vector2.new(input.Position.X, input.Position.Y)
-                end
+            if uis.MouseEnabled and input.UserInputType == Enum.UserInputType.MouseMovement then
+                library.cursor.Position = Vector2.new(input.Position.X, input.Position.Y)
             end
         end)
-        
+
         game:GetService("RunService").RenderStepped:Connect(function()
             uis.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
             library.cursor.Visible = uis.MouseEnabled and (uis.MouseIconEnabled or game:GetService("GuiService").MenuIsOpen)
@@ -70,6 +67,7 @@ if library.theme.cursor and Drawing then
         library.cursor:Remove()
     end
 end
+
 
 function library:CreateWatermark(name, position)
     local gamename = marketplaceservice:GetProductInfo(game.PlaceId).Name
@@ -2938,6 +2936,8 @@ function library:CreateWindow(name, size, hidebutton)
                             keybind.Bind.TextColor3 = Color3.fromRGB(136, 136, 136)
                             if input.UserInputType == Enum.UserInputType.Keyboard then
                                 keybind:Set(input.KeyCode)
+                            elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.MouseButton2 then
+                                keybind:Set(input.UserInputType)
                             else
                                 keybind:Set("None")
                             end
